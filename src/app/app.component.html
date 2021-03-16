@@ -1,0 +1,117 @@
+<div class="container">
+
+    <h1>Order Form</h1>
+
+    <div class="row">        
+        <div class="col-md-6">
+            <form id="paymentForm" name="paymentForm" [action]="model.url" method="post">            
+            <div class="row">
+                <div class="input-group">
+                    <div class="col-md-6">
+                        <label>Amount<br />&nbsp;</label> 
+                    </div>
+                    <div>
+                        <div class="input-group">
+                            <input type="text" [(value)]="model.chargeTotal" id="chargeTotal" name="chargetotal" class="form-control" value="13.00" style="width:80px;" />                    
+                            <div class="input-group-append float-right" style="margin-left:10px;">
+                                <button type="button" class="btn btn-success" *ngIf="!this.sendReady" id="sendTx" (click)='sendTx()'>Send</button>
+                                <button type="submit" class="btn btn-success" *ngIf="this.sendReady" id="confirmTx">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <fieldset>
+                <legend>Data fields (normally hidden):</legend>
+                <div class="row">
+                    <div class="input-group col-md-6">
+                        <label>Transaction type: sale|preauth|postauth|void</label>
+                    </div>
+                    <div>
+                        <input type="text" [(value)]="model.txnType" id="txntype" name="txntype" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group col-md-6">
+                        <label>TimeZone: GMT|CET|EET<br />&nbsp;</label>
+                    </div>
+                    <div>
+                        <input type="text" [(value)]="model.timezone" id="timezone" name="timezone" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group col-md-6">
+                        <label>Transaction Datetime: YYYY:MM:DD-hh:mm:ss</label>
+                    </div>
+                    <div>
+                        <input type="text" [(value)]="model.txnDatetime" id="txndatetime" name="txndatetime" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group col-md-6">
+                        <label>Hash Algorithm: SHA256 | SHA512<br />&nbsp;</label>
+                    </div>
+                    <div>
+                        <input type="text" [(value)]="model.hashAlgorithm" id="hash_algorithm" name="hash_algorithm" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group col-md-6">
+                        <label>Hash: SHA 1 of storename + txndatetime + chargetotal + currency + sharedsecret</label>
+                    </div>
+                    <div>
+                        <input type="text" [(value)]="model.hash" id="hash" name="hash" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group col-md-6">
+                        <label>Storename: Cleanless<br />&nbsp;</label>
+                    </div>
+                    <div>
+                        <input type="text" [(value)]="model.storeName" id="storename" name="storename" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group col-md-6">
+                        <label>Mode: fullpay|payonly|payplus<br />&nbsp;</label>
+                    </div>
+                    <div>
+                        <input type="text" [(value)]="model.mode" id="mode" name="mode" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group col-md-6">
+                        <label>Currency code: 978 (EUR)| 826 (GBP) | 840 (USD) | see manual for more</label>
+                    </div>
+                    <div>
+                        <input type="text" [(value)]="model.currency" id="currency" name="currency" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group col-md-6">
+                        <label>If payment succeeded, redirect to Url</label>
+                    </div>
+                    <div>
+                        <input type="text" [(value)]="model.responseSuccessUrl" id="responseSuccessURL" name="responseSuccessURL" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group col-md-6">
+                        <label>If payment failed, redirect to Url</label>
+                    </div>
+                    <div>
+                        <input type="text" [(value)]="model.responseFailUrl" id="responseFailURL" name="responseFailURL" class="form-control" />
+                    </div>
+                </div>
+            </fieldset>
+        </form>            
+        </div>
+        <div class="col-md-6">
+            <pre [innerHTML]="model.response" id="responseDiv">
+                
+            </pre>
+        </div>
+    </div>
+
+</div>
